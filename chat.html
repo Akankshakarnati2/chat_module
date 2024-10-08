@@ -1,0 +1,111 @@
+<html>
+<head>
+    <title>Chat Box</title>
+    <style>
+body{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color:rgb(220, 214, 209);
+    align-content: center;
+    display: flex;
+    justify-content: center;
+    height: 100px;
+    margin: auto;
+}
+.chatcontainer{
+    border:1px solid #CCC;
+    background-color: white;
+    margin-top: 60px;
+    height: 470px;
+    padding: 30px;
+    width: 260px;
+    border-radius: 15px;
+    background-image:url(https://wallpapercave.com/wp/wp6988872.jpg);
+    background-size: cover;
+    background-position: center; 
+     background-repeat: no-repeat; 
+}
+.chatBox{
+    align-items: center;
+    height: 400px;
+    width: 280px;
+    overflow-y: scroll;
+    border-bottom: 1px solid #ccc;
+}
+.message {
+         padding: 5px 10px;
+         margin: 5px 0;
+        border-radius: 10px;
+        display: inline-block;
+        clear: both;
+        max-width: 70%;
+}
+.right {
+        background-color: rgb(187, 255, 187);
+        float: right;
+}
+.left {
+         background-color: rgb(187, 187, 255);
+        float: left;
+}
+input[type="text"]{
+    padding: 5px;
+    border: 10px solid black;
+    border-radius: 6px;
+}
+button{
+    background: rgb(112, 249, 112);
+    border-radius: 3px;
+    padding: 4px;
+    width: 50px;
+    color: black;
+}
+</style>
+</head>
+<body>
+    <div class="chatcontainer">
+    <div class="chatBox" id="chatBox"></div>
+    <input type="text" id="messageInput1" placeholder="Message">
+    <button id="sendButton1">Send</button>
+    <input type="text" id="messageInput2" placeholder="Message">
+    <button id="sendButton2">Send</button>
+    </div>
+    <script>
+        const chatBox = document.getElementById('chatBox');
+        const messageInput1 = document.getElementById('messageInput1');
+        const sendButton1 = document.getElementById('sendButton1');
+        const messageInput2 = document.getElementById('messageInput2');
+        const sendButton2 = document.getElementById('sendButton2');
+        function appendMessage(message, alignment) {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message', alignment);
+            messageElement.innerText = message;
+            chatBox.appendChild(messageElement);
+            chatBox.scrollTop = chatBox.scrollHeight; 
+        }
+        sendButton1.addEventListener('click', function() {
+            const message = messageInput1.value.trim();
+            if (message !== '') {
+                appendMessage(message, 'right'); 
+                messageInput1.value = '';
+            }
+        });
+        sendButton2.addEventListener('click', function() {
+            const message = messageInput2.value.trim();
+            if (message !== '') {
+                appendMessage( message, 'left'); 
+                messageInput2.value = '';
+            }
+        });
+        messageInput1.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                sendButton1.click();
+            }
+        });
+        messageInput2.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                sendButton2.click();
+            }
+        });
+    </script>
+</body>
+</html>
